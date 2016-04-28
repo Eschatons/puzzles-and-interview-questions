@@ -71,27 +71,40 @@ def primes_under(N):
 
 """
 factor integer w/ crude sieve
+
 """
 
+# returns non-one prime factors of an integer
+# if integer is negative, first factor is "-1"
 def factor(N):
+    if not isinstance(N, int):
+        print('Warning! Input to factor() is a non-integer')
+        return []
+
+        
 # factoring is hard! between O(n^3) and O(n*log(n)^2)
 # if you must do this, do it in a functional language66
     factors = []
-    if N < 0:
+    if N < 0:               # negative numbers
         factors.append(-1)
         N = N*-1
 
-    sqrt = int(N**(.5)+1)
+    if N == 1:              
+        return factors
 
+    sqrt = int(N**(.5)+1)
     primes = primes_under(sqrt)
 
+    ## try and deflate integer w/out repeating prime list
     for p in primes:
-        while N % p == 0: 
+        while N % p == 0:   
             factors.append(p)
             N = N//p
+    if N > 1:   # remaining factor is prime
+        factors.append(N)
     return factors
 
-factors = factor(2*3*5*7*15*33)
+factors = factor(1.)
 print(factors)
 # primes = primes_under(250)
 
