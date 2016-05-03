@@ -29,10 +29,37 @@ def is_palindrome(string):
 #print(newstring)
 
 """
-2. print all permujtations of string both iteratvely and recursively
-FIND THIS OUT
+2. print all permutations of string both iteratvely and recursively
+
+
 """
 
+## recursive
+def permute(string):
+    # recursively permute string by taking each character
+    # and inserting in each possible place
+    if len(string) < 1:
+        return [string]
+        
+    perms = permute(string[1:])
+    char = string[0]
+    result = []
+    
+    for substring in perms:
+        
+        for n in range(len(substring)+1):
+            result.append(''.join([substring[:n], char, substring[n:]]))
+    # 
+    # turn into set to eliminate repeated elements
+    return set(result)
+
+
+#perm = sorted(list(permute('52341c00')))
+#for x in range(50):
+#    print(perm[x])
+
+
+''' find out how to do iterative! '''
 """
 3. write a function to find longest palindrome in given string
 """
